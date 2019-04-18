@@ -1,0 +1,4 @@
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+brew install python3
+python3 -m venv venv    # creates folder “venv” for virtual env
+. venv/bin/activate     # hop into env
