@@ -18,6 +18,7 @@ https://github.com/bradleyjay/failure_enthusiasts/tree/master/python101-environm
 - Set up Virtual Enviroments
 
 ### 3) Then, Nate took us through Python Basics:
+(https://www.w3schools.com/python/)
 - High level Python info
 - If-else Conditionals
 - For Loops (plus Range() )
