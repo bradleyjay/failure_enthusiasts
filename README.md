@@ -8,4 +8,4 @@ Our code base lives here - session notes, setup files for projects, and projects
 
 Happy Failing!
 
-- Brad and Nate
+&mdash; Brad and Nate
