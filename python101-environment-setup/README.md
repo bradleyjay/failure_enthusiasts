@@ -6,7 +6,7 @@ Welcome! Before jumping into projects with Failure Enthusiasts, let's get some b
 - We'll pull down our Failure Enthusiasts directory (so we can all share these project setup files) 
 - We'll install Python3 (Python 2 is deprecated soon) and a package manager. 
 
-### Step 1: Create a "Projects" folder
+## Step 1: Create a "Projects" folder
 First, we'll want directory to keep the files we work on for Projects. I'd recommend creating this in your Home directory, but that's up to you. Feel free to create your Projects folder elsewhere!
 
 First, open a MacOS Terminal window, and change directory to Home:
@@ -22,7 +22,7 @@ mkdir Projects
 cd Projects
 ```
 
-### Step 2: Clone this Repo
+## Step 2: Clone this Repo
 We'll use a `git clone` to pull the Failure Enthusiasts directory down from github to your local machine. That will let us collaborate, allow access to base project setup files, and so on. 
 
 Run this command from your "Projects" folder:
@@ -38,17 +38,17 @@ cd python101-environment-setup
 
 Ok! Now we're ready to setup our system.
 
-### Step 3: Install Homebrew
+## Step 3: Install Homebrew
 We'll need a basic package manager to install Python3. Let's use `homebrew`. Start in your Mac OSX terminal, and run this command:
 
 `/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
 
-### Step 2: Install Python3
+## Step 3: Install Python3
 Now, install Python 3 with the command:
 
 `brew install python3`
 
-### Step 4: 
+### Step 4: Create our first Virtual Environment
 Finally, for each project we work on, we'll want to create a Virtual Environment. Once created, installing Python packages will *only* install the package for that project enviornment. 
 
 This is important because each project will require different tools and packages, and new versions of various tools may break each other. Creating an enviornment means that all those versions stay static for that particular project alone, unless we change them ourselves. 
