@@ -48,7 +48,7 @@ Now, install Python 3 with the command:
 
 `brew install python3`
 
-### Step 4: Create our first Virtual Environment
+## Step 4: Create our first Virtual Environment
 Finally, for each project we work on, we'll want to create a Virtual Environment. Once created, installing Python packages will *only* install the package for that project enviornment. 
 
 This is important because each project will require different tools and packages, and new versions of various tools may break each other. Creating an enviornment means that all those versions stay static for that particular project alone, unless we change them ourselves. 
