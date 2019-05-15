@@ -1,0 +1,22 @@
+*Failure Enthusiasts - Week V update - 5/14/19*
+
+What’s up what’s up what’s up :shufflepartyparrot:
+
+Hope your Tuesday is going well!  This is exciting - we’re starting to really build things, and getting our hands on the code!
+
+We’ve been working on our *Weather App*. Whiteboard image below. The high-level plan is (Darksky API call and parser) -> (DB storage) -> (DB query) -> (Graphing, etc)
+
+*Last week:*
+- Successfully setup Postman, Darksky API
+- Made the Darksky API call, got a 200 response in Postman
+- Built the Python to make the Darksky call programmatically in Python
+- Unpacked the API response to prove we got data
+- Set our Python script to hit the API periodically
+
+*This week:*
+- We’ll cover Postgres (using a schema to setup a DB, ideally how to connect to it via Python, and practice that from some skeleton code)
+- We’ll also tackle Git/Github basics (how to pull a repo, creating a branch, pushing local changes, then how to merge back into the Master “properly”)
+
+We’ll post the code from last week and skeleton code (which we’ll fill in this week, color-by-numbers style) shortly. Thanks all!
+
+- Nate and Brad

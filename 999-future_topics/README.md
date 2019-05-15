@@ -13,3 +13,4 @@ Ideally we'll build one piece at a time, session by session. That week, we'll di
 - Text Parsing (for API call response)
 - Database Querying (SQL Connections) and Data Parsing
 - Graphing the data we extract from our DB [Mike Carlos?]
+
