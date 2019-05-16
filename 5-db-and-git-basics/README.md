@@ -6,7 +6,33 @@ Week 5 - *we covered...[TBD]...*
 
 ## Database Basics - Postgres setup
 
-- *deets*
+1. Install Postgres and dependencies for Python
+brew update
+brew install postgresql
+pip3 install psycopg2
+pip3 install sqlalchemy
+
+2. Start the Postgres server! (ideally in another Terminal window)
+postgres -D /usr/local/var/postgres/
+
+3. Log in to the Postgres server
+psql postgres
+
+4. Create the database and then use a command to see the list of your databases
+CREATE DATABASE <<dbname>>;
+\list
+
+5. Create a user to access your database, then use a command to see your list of users
+CREATE ROLE <<username>> WITH LOGIN PASSWORD <<'password'>>;
+\du
+  
+6. Grant access to your user so that it can access the database
+ALTER ROLE <<username>> CREATEDB;
+GRANT ALL PRIVILEGES ON DATABASE <<dbname>> TO <<username>>;
+  
+7. Quit out of the Postgres server
+\q
+
 
 
 ### Github Basics
