@@ -2,7 +2,7 @@
 
 Welcome everyone! 
 
-Our code base lives here - session notes, setup files for projects, and projects themselves (later). I'll add a folder each week, to keep this central and easy to access.
+Our code base lives here - session notes, setup files for projects, and projects themselves (later). We'll add a folder each week, to keep this central and easy to access.
 
 ---
 
