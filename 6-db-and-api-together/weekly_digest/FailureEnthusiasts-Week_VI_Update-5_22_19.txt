@@ -1,0 +1,20 @@
+*Failure Enthusiasts - Week VI update - 5/22/19*
+
+:duckwave: Hi team! :psyduck:
+
+Happy Wednesday! This week, we’ll take the database setup we learned about last week, and look to combine that with our API call script to make a fully functioning backend! If you missed last week, no worries, we’re starting fresh - this week we’ll have two teams - *Database* and *API Call*.
+
+We’ll have one team set up our database and CRUD operations, and the other get our API call Python script ready. Then we’ll put it together!
+
+*Last week:*
+- Covered github basics
+- Worked through a basic Postgres install and setup
+- Successfully wrote to our database
+
+*This week:*
+- We’ll discuss how each  team’s code should interface with the other
+- Each team will build their half - either the database or API call script
+- Finally, we’ll assemble them into a perfecting working, bug free piece of code. Easy as :cake: , right?
+
+See you Thursday! 6:15 in Noho, per usual.
+- Nate and Brad
