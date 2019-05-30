@@ -1,0 +1,21 @@
+*Failure Enthusiasts - Week VII update - 5/30/19*
+
+:shufflepartyparrot: Hi team! :shufflepartyparrot:
+
+Happy Wednesday! This week, we’ll put the finishing touches on the Database and API code we wrote last week. We’ll then put them together, and if that all works, we’ll swap!
+
+Whatever you worked on last week, you’ll be working on the other codebase. If you’re coming in fresh, don’t worry, so are we :smile: Once we’ve swapped, we’ll tackle adding some functionality to each side, to practice working on an unfamiliar codebase.
+
+*Last week:*
+- We discussed what we should pull from the Darksky API, and how to do so
+- We laid out the variable names for that data, and chose how to organize it into a model
+- We developed the necessary functions for both the Database and API teams as a group
+- Finally, we broke into two teams, and tackled building the Database and API code with paired (triplet?) programming!
+
+*This week:*
+- Finishing touches on DB, API code
+- DB Team: Add CRUD (we only Create, today)
+- API Team: Add proper CRUD function import, proper WeatherObject import, rethink timer
+
+See you Thursday! 6:15 in Noho, per usual.
+- Nate and Brad
