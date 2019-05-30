@@ -28,7 +28,7 @@ def parse_current(data):
     if "precipType" not in currently:
         currently["precipType"] = "null"
 
-    parsed = create_model(
+    parsed = Weather_obj(
         currently["time"], 
         currently["summary"], 
         currently["temperature"], 
@@ -36,11 +36,14 @@ def parse_current(data):
         currently["precipType"], 
         currently["precipProbability"]
         )
+    # parsed = create_model(raw_data)
     
+
     crud(parsed)
 
     # jankny test
-    print(parsed)
+    print("this is the present summary")
+    print(parsed.summary)
 
 def parse_future(data):
     hourly = data["hourly"]["data"]
@@ -48,14 +51,17 @@ def parse_future(data):
   
     model_array = []
 
+    print("this is for the future \n")
+
     for i in hourly:
+
+        print("\n" + str(i) + "\n\n")
 
         # object Weather_obj requires precipType
         if "precipType" not in i:
-            parsed["precipType"] = "null"
+            i["precipType"] = "null"
 
-        # this preciptType is busted, fix it in both!!
-        parsed = create_model(
+        parsed = Weather_obj(
             i["time"], 
             i["summary"], 
             i["temperature"], 
@@ -65,14 +71,12 @@ def parse_future(data):
             )
         
         model_array.insert(0,parsed)
+        print("this is one of them: \n" + str(parsed.time))
 
-
+    
     crud(model_array)
 
 
-def create_model(raw):
-    inst = Weather_obj(raw.time, raw.summary, raw.temperature, raw.precipitation_intensity,  raw.precipitation_type, raw.precipitation_probability)
-    return inst
 
 def crud(an_input):
     # call the DB team's crud function here
@@ -93,6 +97,7 @@ while True:
         parse_future(data)
     
     parse_current(data)
+    parse_future(data)
     
     # wait one minute
     time.sleep(60)
