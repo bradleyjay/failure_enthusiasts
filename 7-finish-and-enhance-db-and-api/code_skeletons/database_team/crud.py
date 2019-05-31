@@ -1,27 +1,38 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-
 from model import Weather_obj
-from create_db import Actual_weather
+from create_db import Actual_weather, Predictive_weather
 
-def make_connection():
-    db = create_engine("postgres://weather_app_user:'1234'@localhost:5432/postgres")
-    return db
-
-def make_session(db):
+def add_data(table, obj):
+    db = create_engine("postgres://weather_app_user_new:1234@localhost:5432/postgres")
     DBsession = sessionmaker(db)
     session = DBsession()
-    return session
-
-def create(table_name, Weather_obj):
-    db = make_connection()
-    session = make_session(db)
-    if table_name == 'Actual_weather':
-        new_data = Actual_weather(Weather_obj)  
+    if table == 'actual':
+        new_data = Actual_weather(
+                    time = obj.time
+                    , summary = obj.summary
+                    , temperature = obj.temperature
+                    , precipitation_intensity = obj.precipitation_intensity
+                    , precipitation_type = obj.precipitation_type
+                    , precipitation_probability = obj.precipitation_probability
+                   )
+        session.add(new_data)
+        session.commit()
+        session.close()
+    elif table == 'predictive':
+        new_data = Predictive_weather(
+                    time = obj.time
+                    , summary = obj.summary
+                    , temperature = obj.temperature
+                    , precipitation_intensity = obj.precipitation_intensity
+                    , precipitation_type = obj.precipitation_type
+                    , precipitation_probability = obj.precipitation_probability
+                   )
+        session.add(new_data)
+        session.commit()
+        session.close()
     else:
-        new_data = Predictive_weather(Weather_obj)
-    session.add(new_data)
-    session.commit()
-blah = Weather_obj('1','1','1','1','1','1')
-create('Actual_weather', blah)
-    
+        print('table name should be actual or predictive')
+
+blah = Weather_obj("1","1","1","1","1","1")
+add_data('predictive',blah)
