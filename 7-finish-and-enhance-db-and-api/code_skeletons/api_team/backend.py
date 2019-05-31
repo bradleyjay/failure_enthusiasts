@@ -86,6 +86,19 @@ def crud(an_input):
 
 while True:
 
+    print("\n\n starting  new  minute")
+
+    time_to_next_minute = 60 - datetime.datetime.now().time().second
+
+    print("time to  next minute: " + str(time_to_next_minute))
+    
+
+    time.sleep(time_to_next_minute)
+
+    print("time now: " + str(datetime.datetime.now().time()))
+
+    # if  datetime.now().time().minute == 0
+
     data = make_connection()
     
 
@@ -98,9 +111,13 @@ while True:
     
     parse_current(data)
     parse_future(data)
+        
+        # wait one minute
     
-    # wait one minute
-    time.sleep(60)
+
+
+
+
 
 
 
