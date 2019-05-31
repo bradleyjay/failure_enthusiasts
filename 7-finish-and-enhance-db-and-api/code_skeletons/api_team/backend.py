@@ -1,19 +1,8 @@
 import requests
 import time
 import datetime
-
-class Weather_obj:
-
-# Note: id is removed
-# SHOULD BE REFACTORED -> instead import "weather object module" - this shouldn't exist in two places
-
-    def __init__(self, time, summary, temperature, precipitation_intensity, precipitation_type, precipitation_probability):
-            self.time = time
-            self.summary = summary
-            self.temperature = temperature
-            self.precipitation_intensity = precipitation_intensity
-            self.precipitation_type = precipitation_type
-            self.precipitation_probability = precipitation_probability
+from model import Weather_obj
+#from CRUD_MODULE import add_data
 
 
 def make_connection():
@@ -39,16 +28,17 @@ def parse_current(data):
     # parsed = create_model(raw_data)
     
 
-    crud(parsed)
+    add_data('actual', parsed)
 
     # jankny test
     print("this is the present summary")
     print(parsed.summary)
 
+
+
 def parse_future(data):
     hourly = data["hourly"]["data"]
     
-  
     model_array = []
 
     print("this is for the future \n")
@@ -74,45 +64,44 @@ def parse_future(data):
         print("this is one of them: \n" + str(parsed.time))
 
     
-    crud(model_array)
+    add_data('predictive', model_array)
 
 
 
-def crud(an_input):
-    # call the DB team's crud function here
+def add_data(table, obj):
+    # table can be 'actual' or 'predicitive'
+    # obj is the 'model' object, i.e. Weather_obj
+    # for 'future', list of models is ok, DB team will unpack
+    # replace with imported add_data
     pass
 
 
 
 while True:
 
+# change "time to next minute" to "time to next hour" for the real thing
+
+    # begin the  minute
     print("\n\n starting  new  minute")
 
+    # calculate time to next minute, wait
     time_to_next_minute = 60 - datetime.datetime.now().time().second
-
     print("time to  next minute: " + str(time_to_next_minute))
-    
-
     time.sleep(time_to_next_minute)
 
+
+    # state the time, grab data
     print("time now: " + str(datetime.datetime.now().time()))
-
-    # if  datetime.now().time().minute == 0
-
     data = make_connection()
     
-
-    ## Issue: what if this never hits midnight exactly? Breaks
-    ## could wait to sync with the minute, etc...
     
     if datetime.datetime.now().time().hour == 0 and datetime.datetime.now().time().minute == 0:
         
         parse_future(data)
     
     parse_current(data)
-    parse_future(data)
+    parse_future(data)   # for now
         
-        # wait one minute
     
 
 
