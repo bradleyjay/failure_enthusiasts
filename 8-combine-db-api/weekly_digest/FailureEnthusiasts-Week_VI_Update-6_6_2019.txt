@@ -1,0 +1,21 @@
+*Failure Enthusiasts - Week VIII update - 6/6/19*
+
+:gir_dance: Oh hey team! :hamster_dance:
+
+Happy Thursday! This week, we’ll see if we can polish up what we had from last week -  we’ll round out what’s left of the Database “Create” function, then take a shot at combining the DB and API sides. If we can get this all on one Github branch, all the better!
+
+Then, potentially from last week too:
+“Whatever you worked on last week, you’ll be working on the other codebase. If you’re coming in fresh, don’t worry, so are we :smile: Once we’ve swapped, we’ll tackle adding some functionality to each side, to practice working on an unfamiliar codebase.”
+
+*Last week:*
+- We split into two teams, to wrap up the API and Database codebases
+- DB: we completed the Database setup script, and the function to take in data and create a new row in the database
+- API: we cleaned up the create functions, set up imports for our “model” object, and streamlined API call timer
+
+*This week:*
+- Finishing touches on DB, API code
+- DB Team: Complete unpacking function, finalize remaining basics
+- API Team: Complete import of CRUD function from DB side, test!
+
+See you Thursday! 6:15 in Noho, per usual.
+- Nate and Brad
