@@ -34,5 +34,15 @@ def add_data(table, obj):
     else:
         print('table name should be actual or predictive')
 
-blah = Weather_obj("1","1","1","1","1","1")
-add_data('predictive',blah)
+
+def unpacker(table, model_array):
+    while model_array:
+        add_data(table, model_array.pop())
+        # print(model_array[-1])
+
+# blah = Weather_obj("1","1","1","3","1","1")
+# blah2 = Weather_obj("1","2","1","1","1","1")
+
+# model_array = [blah, blah2]
+
+# unpacker('actual', model_array)
