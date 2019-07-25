@@ -27,7 +27,7 @@ class Predictive_weather(base):
     precipitation_probability = Column(String())
 
 def create_tables():
-    db = create_engine("postgres://weather_app_user_new:1234@localhost:5432/postgres")
+    db = create_engine("postgres://weather_app_user:1234@localhost:5432/postgres")
     DBsession = sessionmaker(db)
     base.metadata.create_all(db)
     session = DBsession()

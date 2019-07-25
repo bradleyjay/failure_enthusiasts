@@ -1,7 +1,8 @@
 import requests
 import time
 import datetime
-from model import Weather_obj
+from util.model import Weather_obj #check this 
+from crud import unpacker
 #from CRUD_MODULE import add_data
 
 
@@ -17,6 +18,8 @@ def parse_current(data):
     if "precipType" not in currently:
         currently["precipType"] = "null"
 
+    model_array = []
+
     parsed = Weather_obj(
         currently["time"],
         currently["summary"],
@@ -27,8 +30,8 @@ def parse_current(data):
         )
     # parsed = create_model(raw_data)
 
-
-    add_data('actual', parsed)
+    model_array.append(parsed)
+    unpacker('actual', model_array)
 
     # jankny test
     print("this is the present summary")
@@ -64,16 +67,16 @@ def parse_future(data):
         print("this is one of them: \n" + str(parsed.time))
 
 
-    add_data('predictive', model_array)
+    unpacker('predictive', model_array)
 
 
 
-def add_data(table, obj):
-    # table can be 'actual' or 'predicitive'
-    # obj is the 'model' object, i.e. Weather_obj
-    # for 'future', list of models is ok, DB team will unpack
-    # replace with imported add_data
-    pass
+# def add_data(table, obj):
+#     # table can be 'actual' or 'predicitive'
+#     # obj is the 'model' object, i.e. Weather_obj
+#     # for 'future', list of models is ok, DB team will unpack
+#     # replace with imported add_data
+#     pass
 
 
 
