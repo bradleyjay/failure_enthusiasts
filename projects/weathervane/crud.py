@@ -72,8 +72,8 @@ def read_data(start_time,  end_time, attributes, table):
     attribute_string = ", ".join(attributes)
     sql_query = "SELECT " + attribute_string \
                     + " FROM  " + table \
-                    + " WHERE to_timestamp(extract(epoch from time))::date >= '" +  start_time \
-                    + "' AND to_timestamp(extract(epoch from time)) <= '" + end_time \
+                    + " WHERE time >= '" +  start_time \
+                    + "' AND time <= '" + end_time \
                     + "';"
     # unix timestamp needs to be converted
     # time and start_time are strings, so this might break
@@ -81,3 +81,10 @@ def read_data(start_time,  end_time, attributes, table):
     print(sql_query)
     print( db.execute(sql_query))
     print(type(db.execute(sql_query)))
+    # fetchall is required to actually send
+    # https://docs.sqlalchemy.org/en/13/core/connections.html#sqlalchemy.engine.ResultProxy.fetchall
+    #  fetchall has a soft close,  don't have to close session, but lets be adults
+    data = db.execute(sql_query).fetchall()
+    session.close()
+
+    return data
