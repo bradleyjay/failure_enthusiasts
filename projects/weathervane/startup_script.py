@@ -2,11 +2,11 @@
 
 import subprocess
 
-result = subprocess.getstatusoutput('postgrest -D /usr/local/var/postgres/')
+result = subprocess.getstatusoutput('postgres -D /usr/local/var/postgres/')
 
 if "command not found" in str(result):
-    print("error")
-    print(subprocess.getstatusoutput('apt install postgresql'))
+    # print("error")
+    subprocess.getstatusoutput('apt install postgresql')
     subprocess.getstatusoutput('postgres -D /usr/local/var/postgres/')
 else:
     subprocess.getstatusoutput('postgres -D /usr/local/var/postgres/')
