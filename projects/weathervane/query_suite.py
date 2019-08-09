@@ -19,7 +19,7 @@ data = read_data(start_time, end_time, attributes, table)
 print(data)
 
 
-
+# query to now, or query today...something
 
 
 
