@@ -1,10 +1,16 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from util.model import Weather_obj #check this 
+from util.model import Weather_obj #check this
 from create_db import Actual_weather, Predictive_weather
+import os
+
+db_username = str(os.environ.get('DB_USERNAME'))
+db_password = str(os.environ.get('DB_PASSWORD'))
+db_name = str(os.environ.get('DB_NAME'))
+port = str(os.environ.get('PORT'))
 
 def add_data(table, obj):
-    db = create_engine("postgres://weather_app_user:1234@localhost:5432/postgres")
+    db = create_engine("postgres://" + db_username + ":" + db_password + "@localhost:" + port + "/" + db_name)
     DBsession = sessionmaker(db)
     session = DBsession()
     if table == 'actual':
