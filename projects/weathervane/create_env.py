@@ -19,10 +19,10 @@ else:
     subprocess.getstatusoutput('postgres -D /usr/local/var/postgres/')
 
 verify_install('virtualenv')
-# #create venv
-# subprocess.getstatusoutput('python3 -m venv venv')
-# #activate venv
-# subprocess.getstatusoutput('. venv/bin/activate')
+#create venv
+subprocess.getstatusoutput('python3 -m venv venv')
+#activate venv
+subprocess.getstatusoutput('. venv/bin/activate')
 
-verify_install('SQLAlchemy')
-verify_install('psycopg2')
+subprocess.Popen(['venv/bin/pip3', 'install', 'SQLAlchemy'])
+subprocess.Popen(['venv/bin/pip3', 'install', 'psycopg2'])
