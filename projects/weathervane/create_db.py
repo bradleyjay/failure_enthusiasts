@@ -4,6 +4,13 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy import String, Integer, Column
 from sqlalchemy.ext.declarative import declarative_base
 
+import os
+
+db_username = str(os.environ.get('DB_USERNAME'))
+db_password = str(os.environ.get('DB_PASSWORD'))
+db_name = str(os.environ.get('DB_NAME'))
+port = str(os.environ.get('PORT'))
+
 base = declarative_base()
 
 class Actual_weather(base):
@@ -27,7 +34,11 @@ class Predictive_weather(base):
     precipitation_probability = Column(String())
 
 def create_tables():
+<<<<<<< HEAD
+    db = create_engine("postgres://" + db_username + ":" + db_password + "@localhost:" + port + "/" + db_name)
+=======
     db = create_engine("postgres://weather_app_user:1234@localhost:5432/weather_app_db")
+>>>>>>> 9f936cdfeedf647b133133634cb4f0937852a4a0
     DBsession = sessionmaker(db)
     base.metadata.create_all(db)
     session = DBsession()
