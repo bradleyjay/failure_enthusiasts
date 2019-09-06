@@ -11,4 +11,7 @@ con.autocommit = True
 
 cur = con.cursor()
 cur.execute('CREATE DATABASE ' + db_name + ';')
-cur.execute('CREATE USER ' + db_username + ' WITH PASSWORD \'' + db_password + '\';')
+cur.execute('CREATE USER ' + db_username +
+            ' WITH PASSWORD \'' + db_password + '\';')
+
+print('Postgres DB Credentials set up!')

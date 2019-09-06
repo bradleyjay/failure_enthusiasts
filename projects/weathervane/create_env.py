@@ -5,7 +5,9 @@ import subprocess
 mac = True
 if not mac:            # I'm hilarious
     subprocess.getstatusoutput('apt install postgresql')
-    subprocess.getstatusoutput('postgres -D /usr/local/var/postgres/')
+
+subprocess.Popen(['postgres', '-D', '/usr/local/var/postgres/'])
+print('Postgres started!')
 
 # Check for Python3 and Pip3
 logs = []
@@ -24,6 +26,5 @@ print('Pip3 and Python3 detected.')
 
 # No errors? create venv
 subprocess.getstatusoutput('python3 -m venv venv')
-
 subprocess.Popen(['venv/bin/pip3', 'install', '-r', 'requirements.txt'])
-subprocess.Popen(['.', 'venv/bin/activate'])
+print('Create Environment opeation complete!')
