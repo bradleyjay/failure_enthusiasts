@@ -50,7 +50,8 @@ def compare_today(start_time, end_time, attributes):
     predicted_data = read_data(start_time, end_time, attributes, 'predictive_weather')
     return actual_data, predicted_data
 
-
+def compare_today_fake():
+    return 'Hey'
 
 
 

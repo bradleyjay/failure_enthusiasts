@@ -1,13 +1,15 @@
 import requests
 import time
 import datetime
-from util.model import Weather_obj #check this 
+import os
+from util.model import Weather_obj #check this
 from crud import unpacker
 #from CRUD_MODULE import add_data
 
+api_key = str(os.environ.get('API_KEY'))
 
 def make_connection():
-    resp = requests.get('https://api.darksky.net/forecast/c49ab0cc157f5ad35bdb1a9b0769853e/40.756438,-73.990299')
+    resp = requests.get('https://api.darksky.net/forecast/' + api_key + '/40.756438,-73.990299')
     data = resp.json()
     return data
 
