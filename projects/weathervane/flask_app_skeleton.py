@@ -19,7 +19,18 @@ def hello():
 
     # save data to variable, pass to js
     retrieved_data = [[0,1], [1,4],[2,2],[4,0]]
-    return render_template('index.html', retrieved_data = retrieved_data)
+
+    fig, actual_data = create_figure()
+
+    formatted_actual_data = []
+    for actual_dat in actual_data:
+        formatted_actual_data.append([float(actual_dat[0]),float(actual_dat[1])])
+
+    print('\n\n\n This is d:\n')
+    print(formatted_actual_data)
+
+    return render_template('index.html', formatted_actual_data = formatted_actual_data)
+    # return render_template('index.html', retrieved_data = retrieved_data)
 
 
 # @app.route('/<name>')
@@ -70,7 +81,8 @@ def create_figure():
     #     axis.plot(datapair[0], datapair[1])
 
     axis.plot(xs, ys)
-    return fig
+
+    return fig, data['actual_data']
 
 
 if __name__ == '__main__':
