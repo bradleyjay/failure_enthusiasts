@@ -3,7 +3,7 @@ import query_suite
 
 import io
 import random
-from flask import Response
+from flask import Response, render_template
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 from matplotlib.figure import Figure
 import query_suite
@@ -14,12 +14,17 @@ app = Flask(__name__)
 
 @app.route('/')
 def hello():
-    return "Hello World!"
+    # unpack dict object here
+    ####
+
+    # save data to variable, pass to js
+    retrieved_data = [[0,1], [1,4],[2,2],[4,0]]
+    return render_template('index.html', retrieved_data = retrieved_data)
 
 
-@app.route('/<name>')
-def hello_name(name):
-    return "Hello {}!".format(name)
+# @app.route('/<name>')
+# def hello_name(name):
+#     return "Hello {}!".format(name)
 
 
 @app.route('/weather_compare')

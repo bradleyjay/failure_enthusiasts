@@ -1,15 +1,23 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width='device-width', initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <script type="text/javascript" src="chart_generation.js"></script>
-    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script>
+        var retrieved_data = {{ retrieved_data | tojson }}
+    </script>
 </head>
+
 <body>
-    hello world
-    <img src="../static/img.jpg">
+    <h2 id="#title">hello world</h2>
+    <!-- <img src="../static/img.jpg"> -->
+    <div id="chart"></div>
+
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script type="text/javascript" src="/static/chart_generation.js"></script>
 </body>
+
 </html>
