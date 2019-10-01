@@ -18,3 +18,6 @@
 3. Activate the virtualEnv - `. venv/bin/activate`
 
 4. Run the app! `./run.sh`
+
+5. Start flask app! `./run_flask.sh`
+
