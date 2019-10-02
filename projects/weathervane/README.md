@@ -15,6 +15,8 @@
    `cd failure_enthusiasts/projects/weathervane`
 
 2. Copy `variables.sh` to `weathervane/`
+    a. `python3 -m venv venv`
+
 3. Activate the virtualEnv - `. venv/bin/activate`
 
 4. Run the app! `./run.sh`
