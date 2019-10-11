@@ -1,5 +1,9 @@
 # Weathervane
 
+Agent to periodically collect weather data from the Darksky API (https://darksky.net/dev/docs), store in datastore. When user accesses our endpoint, we query the datastore, pull data, and graph in D3. Compares weather prediction from midnight each day to the actual weather that occurs that day.
+
+
+
 ### Requirements:
 - Python 3
 - Pip3
