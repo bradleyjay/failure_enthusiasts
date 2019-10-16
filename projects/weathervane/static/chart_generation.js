@@ -7,6 +7,8 @@ var margin = 100
 // console.log("BEFORE")
 // console.log(formatted_data)
 
+// error here - we assumed two series, predicive data will now only show up one hour into running the agent. SO, need to stop D3 from freaking out when it gets an empty [] instead of an array of arrays with data, for predictive_data specifically.
+
 function createLineChart(formatted_data, chart_title, y_axis_label, x_axis_label) {
     // Multiplying by 1000 since epochs are in milliseconds
 

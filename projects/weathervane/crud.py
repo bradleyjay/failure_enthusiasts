@@ -21,6 +21,8 @@ def add_data(table, obj):
                     , precipitation_intensity = obj.precipitation_intensity
                     , precipitation_type = obj.precipitation_type
                     , precipitation_probability = obj.precipitation_probability
+                    , data_age = obj.data_age
+                    , data_collected_timestamp = obj.data_collected_timestamp
                    )
         session.add(new_data)
         session.commit()
@@ -33,6 +35,8 @@ def add_data(table, obj):
                     , precipitation_intensity = obj.precipitation_intensity
                     , precipitation_type = obj.precipitation_type
                     , precipitation_probability = obj.precipitation_probability
+                    , data_age = obj.data_age
+                    , data_collected_timestamp = obj.data_collected_timestamp
                    )
         session.add(new_data)
         session.commit()
@@ -84,8 +88,8 @@ def read_data(start_time,  end_time, attributes, table, data_age=0, interval=0):
         sql_query += "';"
     else:
         sql_query += \
-            "' AND data_age >= '" +  (data_age - interval) \
-            + "' AND data_age <= '" + (data_age + interval) \
+            "' AND data_age >= '" +  str(data_age - interval) \
+            + "' AND data_age <= '" + str(data_age + interval) \
             + "';"
 
     # unix timestamp needs to be converted
