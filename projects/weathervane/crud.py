@@ -56,8 +56,8 @@ def unpacker(table, model_array):
 
 # unpacker('actual', model_array)
 
-def read_data(start_time,  end_time, attributes, table):
-
+# data_age and interval are only required when reading predictive data to make sure that only one row of predictive data is selected for a given time
+def read_data(start_time,  end_time, attributes, table, data_age=0, interval=0):
 
 # start_time, end_time MUST be strings
 # attributes is an array of strings
@@ -79,8 +79,15 @@ def read_data(start_time,  end_time, attributes, table):
     sql_query = "SELECT " + attribute_string \
                     + " FROM  " + table \
                     + " WHERE time >= '" +  start_time \
-                    + "' AND time <= '" + end_time \
-                    + "';"
+                    + "' AND time <= '" + end_time
+    if (table == "actual_weather"):
+        sql_query += "';"
+    else:
+        sql_query += \
+            "' AND data_age >= '" +  (data_age - interval) \
+            + "' AND data_age <= '" + (data_age + interval) \
+            + "';"
+
     # unix timestamp needs to be converted
     # time and start_time are strings, so this might break
     sql_query

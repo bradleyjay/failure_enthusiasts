@@ -1,6 +1,8 @@
 class Weather_obj:
 
-    def __init__(self, time, summary, temperature, precipitation_intensity, precipitation_type, precipitation_probability):
+    def __init__(self, data_collected_time, data_age, time, summary, temperature, precipitation_intensity, precipitation_type, precipitation_probability):
+            self.data_collected_time = data_collected_time
+            self.data_age = data_age
             self.time = time
             self.summary = summary
             self.temperature = temperature

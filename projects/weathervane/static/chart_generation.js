@@ -1,5 +1,6 @@
 console.log('D3 Time')
 var formatted_data = formatted_data
+console.log(formatted_data)
 var height = 700
 var width = 700
 var margin = 100

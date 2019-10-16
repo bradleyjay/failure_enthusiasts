@@ -27,7 +27,8 @@ def chart_loader():
 
     predictive_data = query_suite.grab_from_predictive(
         start_time, end_time, ['time', 'temperature'])
-
+    print('Predictive!')
+    print(predictive_data)
 
     # unpack from dict (JS can't use it) -> list of lists. save data to variable, pass to js
 
