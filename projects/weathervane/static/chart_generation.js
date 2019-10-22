@@ -128,6 +128,7 @@ function createLineChart(formatted_data, chart_title, y_axis_label, x_axis_label
             .style("font-size", 15)
             .text("Hi or whatever")
         // Currently, next graph overwrites this block, hence why BLACK shows up, not RED
+        // for next time, https://www.d3-graph-gallery.com/graph/custom_legend.html
     }
 
     addLine(formatted_data[0], "red")
