@@ -4,6 +4,8 @@ console.log(formatted_data)
 var height = 700
 var width = 700
 var margin = 100
+var legend_width = 200
+var legend_height = 200
 // console.log("BEFORE")
 // console.log(formatted_data)
 
@@ -36,6 +38,13 @@ function createLineChart(formatted_data, chart_title, y_axis_label, x_axis_label
         .attr("height", height)
         .attr("width", width)
 
+    // legend
+    svg.append("g")
+        .attr("id", "legend")
+        .attr("transform", "translate(" + (width - legend_width) + ", 0)")
+        .attr("height", legend_height)
+        .attr("width", legend_width)
+
     // svg.append("rect")
     //     .attr("height", height - margin)
     //     .attr("width", width - margin)
@@ -50,14 +59,14 @@ function createLineChart(formatted_data, chart_title, y_axis_label, x_axis_label
     actual_y_max = d3.max(formatted_data[0], (d) => d[1])
 
     // bogus extreme values in case formatted_data isn't available
-    if (formatted_data[1] = []){
-      predictive_x_min = 32529079406000
-      predictive_x_max = -2183589394000
-      predictive_y_max = -5000
+    if (formatted_data[1] = []) {
+        predictive_x_min = 32529079406000
+        predictive_x_max = -2183589394000
+        predictive_y_max = -5000
     } else {
-      predictive_x_min = d3.min(formatted_data[1], (d) => d[0])
-      predictive_x_max = d3.max(formatted_data[1], (d) => d[0])
-      predictive_y_max = d3.max(formatted_data[1], (d) => d[1])
+        predictive_x_min = d3.min(formatted_data[1], (d) => d[0])
+        predictive_x_max = d3.max(formatted_data[1], (d) => d[0])
+        predictive_y_max = d3.max(formatted_data[1], (d) => d[1])
     }
 
     var x_min = Math.min(actual_x_min, predictive_x_min)
@@ -105,10 +114,27 @@ function createLineChart(formatted_data, chart_title, y_axis_label, x_axis_label
                     .x((d) => x(d[0]))
                     .y((d) => y(d[1]))
             )
+        d3.select("#legend")
+            .append("rect")
+            .attr("height", 15)
+            .attr("width", 15)
+            .attr("fill", line_color)
+
+        d3.select("#legend")
+            .append('text')
+            .attr("transform", "translate(20,13.5)")
+            .attr("height", 30)
+            .attr("width", 100)
+            .style("font-size", 15)
+            .text("Hi or whatever")
+        // Currently, next graph overwrites this block, hence why BLACK shows up, not RED
     }
 
     addLine(formatted_data[0], "red")
-    // addLine(formatted_data[1], "black")
+
+    if (formatted_data[1] != []) {
+        addLine(formatted_data[1], "black")
+    }
     svg.append("g")
         .attr("transform", "translate(" + margin + ",0)")
         .call(y_axis)
@@ -129,6 +155,8 @@ function createLineChart(formatted_data, chart_title, y_axis_label, x_axis_label
         .attr("x", (margin + width) / 2)
         .style("text-anchor", "middle")
         .text(x_axis_label)
+
 }
+
 
 createLineChart(formatted_data, "Predictive vs Actual Weather", "Degrees (F)", "Time")
