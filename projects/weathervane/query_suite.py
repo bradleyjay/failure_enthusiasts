@@ -8,6 +8,8 @@ import datetime
 attributes = ['time', 'summary', 'temperature']
 # table = 'actual_weather'
 
+hour_interval = int( .5 * 3600) # 3600s = 1 hr, 1hr frequency rn
+minute_interval = int( .5 * 60 )
 # data = read_data(start_time, end_time, attributes, table)
 # print(data.keys())
 # input()
@@ -23,17 +25,17 @@ attributes = ['time', 'summary', 'temperature']
 
 
 # 2) Grab X from actual
-def grab_from_actual(start_time, end_time, attributes):
+def grab_from_actual(start_time, end_time, attributes, data_age=0, interval=0):
     table = 'actual_weather'
-    data = read_data(start_time, end_time, attributes, table)
+    data = read_data(start_time, end_time, attributes, table, data_age, interval)
     return {"actual_data": data}
 
 # 3) Grab X from predictive
 
 
-def grab_from_predictive(start_time, end_time, attributes):
+def grab_from_predictive(start_time, end_time, attributes, data_age=3600, interval=hour_interval):
     table = 'predictive_weather'
-    data = read_data(start_time, end_time, attributes, table)
+    data = read_data(start_time, end_time, attributes, table, data_age, interval)
     return {"predictive_data": data}
 # 1) Compare today
 
@@ -48,8 +50,10 @@ def compare_today(attributes):
     end_time = str(datetime.datetime.now().timestamp())
 
     actual_data = read_data(start_time, end_time, attributes, 'actual_weather')
+
+    # hardcoding interval for now, but could be parameter in future
     predictive_data = read_data(
-        start_time, end_time, attributes, 'predictive_weather')
+        start_time, end_time, attributes, 'predictive_weather', )
     return {"actual_data": actual_data, "predictive_data": predictive_data}
 
 

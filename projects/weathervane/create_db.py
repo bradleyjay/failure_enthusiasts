@@ -22,6 +22,8 @@ class Actual_weather(base):
     precipitation_intensity = Column(String())
     precipitation_type = Column(String())
     precipitation_probability = Column(String())
+    data_age = Column(Integer())
+    data_collected_timestamp = Column(String())
 
 class Predictive_weather(base):
     __tablename__ = 'predictive_weather'
@@ -32,6 +34,8 @@ class Predictive_weather(base):
     precipitation_intensity = Column(String())
     precipitation_type = Column(String())
     precipitation_probability = Column(String())
+    data_age = Column(Integer())
+    data_collected_timestamp = Column(String())
 
 def create_tables():
     db = create_engine("postgres://" + db_username + ":" + db_password + "@localhost:" + port + "/" + db_name)
