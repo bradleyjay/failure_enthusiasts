@@ -8,6 +8,15 @@ var legend_width = 200
 var legend_height = 200
 var legend_increment = 0
 
+var tooltip = d3.select("body")
+    .append("div")
+    .style("position", "absolute")
+    .style("z-index", "10")
+    .style("visibility", "hidden")
+    .style("background", "#000")
+    .style("color", "white")
+    .text("a simple tooltip");
+
 // console.log("BEFORE")
 // console.log(formatted_data)
 
@@ -116,6 +125,12 @@ function createLineChart(formatted_data, chart_title, y_axis_label, x_axis_label
                     .x((d) => x(d[0]))
                     .y((d) => y(d[1]))
             )
+            .on("mouseover", () => tooltip.style("visibility", "visible"))
+            .on("mousemove", (d) => {
+                tooltip.text(dataset_name + "\nTime: " + d[0] + "\nValue: " + d[1])
+                tooltip.style("top", (d3.event.pageY - 10) + "px").style("left", (d3.event.pageX + 10) + "px")
+            })
+            .on("mouseout", () => tooltip.style("visibility", "hidden"))
 
         dynamic_mod = Math.floor(data_to_plot.length * 0.1)
 
