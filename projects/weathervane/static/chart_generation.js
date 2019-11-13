@@ -117,6 +117,22 @@ function createLineChart(formatted_data, chart_title, y_axis_label, x_axis_label
                     .y((d) => y(d[1]))
             )
 
+        dynamic_mod = Math.floor(data_to_plot.length * 0.1)
+
+        svg.selectAll(".dot")
+            .data(data_to_plot)
+            .enter()
+            .append("circle")
+            .attr("r", 3)
+            .attr("cx", d => x(d[0]))
+            .attr("cy", d => y(d[1]))
+            .attr("fill", (d, i) => {
+                if (i % dynamic_mod == 0) {
+                    return line_color
+                } else {
+                    return "none"
+                }
+            })
 
         d3.select("#legend")
             .append("rect")
