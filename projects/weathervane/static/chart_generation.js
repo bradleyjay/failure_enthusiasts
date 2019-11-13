@@ -6,12 +6,14 @@ var width = 700
 var margin = 100
 var legend_width = 200
 var legend_height = 200
+var legend_increment = 0
+
 // console.log("BEFORE")
 // console.log(formatted_data)
 
-// error here - we assumed two series, predicive data will now only show up one hour into running the agent. SO, need to stop D3 from freaking out when it gets an empty [] instead of an array of arrays with data, for predictive_data specifically.
+// this might be fixed table for now - check with proper predictive data. Make sure two lines are graphed. (error here - we assumed two series, predicive data will now only show up one hour into running the agent. SO, need to stop D3 from freaking out when it gets an empty [] instead of an array of arrays with data, for predictive_data specifically.)
 
-function createLineChart(formatted_data, chart_title, y_axis_label, x_axis_label) {
+function createLineChart(formatted_data, chart_title, y_axis_label, x_axis_label, dataset_name) {
     // Multiplying by 1000 since epochs are in milliseconds
 
     formatted_data[0].forEach((d) => { d[0] = d[0] * 1000; })
@@ -92,7 +94,7 @@ function createLineChart(formatted_data, chart_title, y_axis_label, x_axis_label
 
     var y_axis = d3.axisLeft(y)
 
-    function addLine(data_to_plot, line_color) {
+    function addLine(data_to_plot, dataset_name, line_color) {
 
         console.log("Data to Plot")
         // draw line
@@ -114,27 +116,34 @@ function createLineChart(formatted_data, chart_title, y_axis_label, x_axis_label
                     .x((d) => x(d[0]))
                     .y((d) => y(d[1]))
             )
+
+
         d3.select("#legend")
             .append("rect")
+            .attr("transform", "translate(0, " + legend_increment + ")")
             .attr("height", 15)
             .attr("width", 15)
             .attr("fill", line_color)
 
         d3.select("#legend")
             .append('text')
-            .attr("transform", "translate(20,13.5)")
+            .attr("transform", "translate(20," + (13.5 + legend_increment) + ")")
             .attr("height", 30)
             .attr("width", 100)
             .style("font-size", 15)
-            .text("Hi or whatever")
+            .text(dataset_name)
+
+
+        legend_increment += 23
+
         // Currently, next graph overwrites this block, hence why BLACK shows up, not RED
         // for next time, https://www.d3-graph-gallery.com/graph/custom_legend.html
     }
 
-    addLine(formatted_data[0], "red")
+    addLine(formatted_data[0], dataset_name[0], "red")
 
     if (formatted_data[1] != []) {
-        addLine(formatted_data[1], "black")
+        addLine(formatted_data[1], dataset_name[1], "black")
     }
     svg.append("g")
         .attr("transform", "translate(" + margin + ",0)")
@@ -160,4 +169,4 @@ function createLineChart(formatted_data, chart_title, y_axis_label, x_axis_label
 }
 
 
-createLineChart(formatted_data, "Predictive vs Actual Weather", "Degrees (F)", "Time")
+createLineChart(formatted_data, "Predictive vs Actual Weather", "Degrees (F)", "Time", ['Actual', 'Predicitive'])
