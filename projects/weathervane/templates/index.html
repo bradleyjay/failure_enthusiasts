@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width='device-width', initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <title>Document</title>
     <script>
         var formatted_data = {{ formatted_data | tojson }}
@@ -12,11 +13,34 @@
 </head>
 
 <body>
-    <!-- <img src="../static/img.jpg"> -->
-    <div id="chart"></div>
+    <!--header-->
+    <h1 class="jumbotron bg-info text-center text-white">Weathervane</h1>
+    <div class="row">
+        <div class="col-lg-4 bg-danger">
 
-    <script src="https://d3js.org/d3.v4.min.js"></script>
-    <script type="text/javascript" src="/static/chart_generation.js"></script>
+        </div>
+
+        <!-- <img src="../static/img.jpg"> -->
+        <div id="chart" class="col-lg-8">
+
+            <script src="https://d3js.org/d3.v4.min.js"></script>
+            <script class="jumbotron" type="text/javascript" src="/static/chart_generation.js"></script>
+
+        </div>
+    </div>
+    <!-- Footer -->
+    <footer class="page-footer font-small blue bg-info text-white">
+
+            <!-- Copyright -->
+        <div class="footer-copyright text-center py-3">© 2019 Copyright:
+            <a href="https://mdbootstrap.com/education/bootstrap/"> Brad is okay</a>
+        </div>
+            <!-- Copyright -->
+
+    </footer>
+        <!-- Footer -->
 </body>
+
+
 
 </html>
