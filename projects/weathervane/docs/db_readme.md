@@ -28,3 +28,7 @@ GRANT ALL PRIVILEGES ON DATABASE weather_app_db TO weather_app_user;```
 ```\q```
 
 8. Pray.
+
+9.  run ps
+find the  process number  PID
+kill  -9  PID

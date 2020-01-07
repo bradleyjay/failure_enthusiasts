@@ -1,28 +1,30 @@
 import subprocess
 
-pip_list = subprocess.getstatusoutput('pip3 list')[1]
 
-def verify_install(library):
-    is_library_installed = (pip_list.find(library) > 0)
-
-    if not is_library_installed:
-        print('installing ' + library)
-        subprocess.getstatusoutput('pip3 install ' + library)
-
-# check for postgres and install if not present
-result = subprocess.getstatusoutput('postgres -D /usr/local/var/postgres/')
-
-if "command not found" in str(result):
+# Prep Postgres, start postgres
+mac = True
+if not mac:            # I'm hilarious
     subprocess.getstatusoutput('apt install postgresql')
-    subprocess.getstatusoutput('postgres -D /usr/local/var/postgres/')
-else:
-    subprocess.getstatusoutput('postgres -D /usr/local/var/postgres/')
 
-verify_install('virtualenv')
-#create venv
+subprocess.Popen(['postgres', '-D', '/usr/local/var/postgres/'])
+print('Postgres started!')
+
+# Check for Python3 and Pip3
+logs = []
+if "pip3" not in subprocess.getstatusoutput('which pip3')[1]:
+    logs.append('Please install pip3 before continuing!')
+
+if "python3" not in subprocess.getstatusoutput('which python3')[1]:
+    logs.append('Please install python3 before continuing!')
+
+if logs:
+    for i in logs:
+        print(str(i))
+    quit()
+
+print('Pip3 and Python3 detected.')
+
+# No errors? create venv
 subprocess.getstatusoutput('python3 -m venv venv')
-#activate venv
-subprocess.getstatusoutput('. venv/bin/activate')
-
-subprocess.Popen(['venv/bin/pip3', 'install', 'SQLAlchemy'])
-subprocess.Popen(['venv/bin/pip3', 'install', 'psycopg2'])
+subprocess.Popen(['venv/bin/pip3', 'install', '-r', 'requirements.txt'])
+print('Create Environment opeation complete!')
