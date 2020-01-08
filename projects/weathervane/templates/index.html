@@ -8,7 +8,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <title>Document</title>
     <script>
-        var formatted_data = {{ formatted_data | tojson }}
+        var actual_data = {{ actual_data | tojson }}
+        var predictive_data = {{ predictive_data | tojson }}
     </script>
 </head>
 

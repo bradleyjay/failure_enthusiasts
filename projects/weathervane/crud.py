@@ -80,6 +80,7 @@ def read_data(start_time,  end_time, attributes, table, data_age=0, interval=0):
     DBsession = sessionmaker(db)
     session = DBsession()
     attribute_string = ", ".join(attributes)
+    # issue with data age prevents pulling predictive data. Data age is currently calculated as time minus collected time
     sql_query = "SELECT " + attribute_string \
                     + " FROM  " + table \
                     + " WHERE time >= '" +  start_time \

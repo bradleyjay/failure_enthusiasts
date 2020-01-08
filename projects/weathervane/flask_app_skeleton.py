@@ -36,17 +36,17 @@ def chart_loader():
     formatted_predictive_data = []
 
     for data in actual_data['actual_data']:
-        formatted_actual_data.append([float(data[0]),float(data[1])])
+        formatted_actual_data.append({"time": float(data[0]), "temperature": float(data[1])})
 
     for data in predictive_data['predictive_data']:
-        formatted_predictive_data.append([float(data[0]),float(data[1])])
+        formatted_predictive_data.append({"time": float(data[0]), "temperature": float(data[1])})
 
-    formatted_data = [formatted_actual_data, formatted_predictive_data]
+    formatted_data = {"actual": formatted_actual_data, "predictive": formatted_predictive_data}
 
     print('\n\n\n This is d:\n')
     print(formatted_data)
 
-    return render_template('index.html', formatted_data = formatted_data)
+    return render_template('index.html', actual_data = formatted_actual_data, predictive_data = formatted_predictive_data)
 
 
 if __name__ == '__main__':

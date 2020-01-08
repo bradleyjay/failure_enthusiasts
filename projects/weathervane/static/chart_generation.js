@@ -1,6 +1,9 @@
-console.log('D3 Time')
-var formatted_data = formatted_data
-console.log(formatted_data)
+console.log('actual_data')
+var actual_data = actual_data
+console.log(actual_data)
+console.log('predictive_data')
+var predictive_data = predictive_data
+console.log(predictive_data)
 var height = 700
 var width = 700
 var margin = 100
@@ -11,16 +14,16 @@ var legend_height = 200
 
 // error here - we assumed two series, predicive data will now only show up one hour into running the agent. SO, need to stop D3 from freaking out when it gets an empty [] instead of an array of arrays with data, for predictive_data specifically.
 
-function createLineChart(formatted_data, chart_title, y_axis_label, x_axis_label) {
+function createLineChart(actual_data, predictive_data, chart_title, y_axis_label, x_axis_label) {
     // Multiplying by 1000 since epochs are in milliseconds
 
-    formatted_data[0].forEach((d) => { d[0] = d[0] * 1000; })
-    formatted_data[1].forEach((d) => { d[0] = d[0] * 1000; })
+    actual_data.forEach((d) => { d["time"] = d["time"] * 1000; })
+    predictive_data.forEach((d) => { d["time"] = d["time"] * 1000; })
     // console.log("AFTER")
     // console.log(formatted_data)
 
     // sorting predictive data by time
-    formatted_data[1].sort((x, y) => {
+    predictive_data.sort((x, y) => {
         return d3.ascending(x[0], y[0]);
     })
 
@@ -55,19 +58,20 @@ function createLineChart(formatted_data, chart_title, y_axis_label, x_axis_label
 
     // render basic line
 
-    actual_x_min = d3.min(formatted_data[0], (d) => d[0])
-    actual_x_max = d3.max(formatted_data[0], (d) => d[0])
-    actual_y_max = d3.max(formatted_data[0], (d) => d[1])
+    actual_x_min = d3.min(actual_data, (d) => d["time"])
+    actual_x_max = d3.max(actual_data, (d) => d["time"])
+    actual_y_max = d3.max(actual_data, (d) => d["temperature"])
 
     // bogus extreme values in case formatted_data isn't available
-    if (formatted_data[1] = []) {
+
+    if (predictive_data.length == 0) {
         predictive_x_min = 32529079406000
         predictive_x_max = -2183589394000
         predictive_y_max = -5000
     } else {
-        predictive_x_min = d3.min(formatted_data[1], (d) => d[0])
-        predictive_x_max = d3.max(formatted_data[1], (d) => d[0])
-        predictive_y_max = d3.max(formatted_data[1], (d) => d[1])
+        predictive_x_min = d3.min(predictive_data, (d) => d["time"])
+        predictive_x_max = d3.max(predictive_data, (d) => d["time"])
+        predictive_y_max = d3.max(predictive_data, (d) => d["temperature"])
     }
 
     var x_min = Math.min(actual_x_min, predictive_x_min)
@@ -109,11 +113,11 @@ function createLineChart(formatted_data, chart_title, y_axis_label, x_axis_label
             .attr("fill", "none")
             .attr("stroke", line_color)
             .attr("stroke-width", 1.5)
-            .attr("id", (d) => console.log("d0: " + x(d[0]) + " d1: " + y(d[1])))
+            .attr("id", (d) => console.log("d0: " + x(d["time"]) + " d1: " + y(d["temperature"])))
             .attr("d"
                 , d3.line()
-                    .x((d) => x(d[0]))
-                    .y((d) => y(d[1]))
+                    .x((d) => x(d["time"]))
+                    .y((d) => y(d["temperature"]))
             )
 
         d3.select("#legend")
@@ -133,10 +137,10 @@ function createLineChart(formatted_data, chart_title, y_axis_label, x_axis_label
         // for next time, https://www.d3-graph-gallery.com/graph/custom_legend.html
     }
 
-    addLine(formatted_data[0], "red")
+    addLine(actual_data, "red")
 
-    if (formatted_data[1] != []) {
-        addLine(formatted_data[1], "black")
+    if (predictive_data != []) {
+        addLine(predictive_data, "black")
     }
     svg.append("g")
         .attr("transform", "translate(" + margin + ",0)")
@@ -162,4 +166,4 @@ function createLineChart(formatted_data, chart_title, y_axis_label, x_axis_label
 }
 
 
-createLineChart(formatted_data, "Predictive vs Actual Weather", "Degrees (F)", "Time")
+createLineChart(actual_data, predictive_data, "Predictive vs Actual Weather", "Degrees (F)", "Time")
