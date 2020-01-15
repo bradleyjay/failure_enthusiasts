@@ -19,7 +19,8 @@
         crossorigin="anonymous"></script>
 
     <script>
-        var formatted_data = {{ formatted_data | tojson }}
+        var actual_data = {{ actual_data | tojson }}
+        var predictive_data = {{ predictive_data | tojson }}
     </script>
 
     <title>Weathervane</title>
