@@ -18,7 +18,9 @@ var tooltip = d3.select("body")
     .style("visibility", "hidden")
     .style("background", "#000")
     .style("color", "white")
-    .text("a simple tooltip");
+    .style("border-radius", "5px")
+    .style("padding", "7px")
+    .html("");
 
 // this might be fixed table for now - check with proper predictive data. Make sure two lines are graphed. (error here - we assumed two series, predicive data will now only show up one hour into running the agent. SO, need to stop D3 from freaking out when it gets an empty [] instead of an array of arrays with data, for predictive_data specifically.)
 
@@ -92,18 +94,11 @@ function createLineChart(actual_data, predictive_data, chart_title, y_axis_label
             .attr("fill", "none")
             .attr("stroke", line_color)
             .attr("stroke-width", 1.5)
-            .attr("id", (d) => console.log("d0: " + x(d["time"]) + " d1: " + y(d["temperature"])))
             .attr("d"
                 , d3.line()
                     .x((d) => x(d["time"]))
                     .y((d) => y(d["temperature"]))
             )
-            .on("mouseover", () => tooltip.style("visibility", "visible"))
-            .on("mousemove", (d) => {
-                tooltip.text(dataset_name + "\nTime: " + d[0] + "\nValue: " + d[1])
-                tooltip.style("top", (d3.event.pageY - 10) + "px").style("left", (d3.event.pageX + 10) + "px")
-            })
-            .on("mouseout", () => tooltip.style("visibility", "hidden"))
 
         dynamic_mod = Math.floor(data_to_plot.length * 0.1)
 
@@ -121,6 +116,20 @@ function createLineChart(actual_data, predictive_data, chart_title, y_axis_label
                     return "none"
                 }
             })
+            .on("mouseover", () => tooltip.style("visibility", "visible"))
+            .on("mousemove", (d) => {
+                utcSeconds = d["time"];
+                data_time = new Date(0);
+                data_time.setUTCSeconds(utcSeconds / 1000);
+                data_month = data_time.getMonth() + 1
+                data_date = data_time.getDate() < 10 ? "0" + data_time.getDate() + 1 : data_time.getDate()
+                data_hour = data_time.getHours()
+                data_minutes = data_time.getMinutes() < 10 ? "0" + data_time.getMinutes() : data_time.getMinutes()
+                data_time_string = data_month + "/" + data_date + " " + data_hour + ":" + data_minutes
+                tooltip.html(dataset_name + "<br/> Time: " + data_time_string + "<br/> Value: " + d["temperature"])
+                tooltip.style("top", (d3.event.pageY - 10) + "px").style("left", (d3.event.pageX + 10) + "px")
+            })
+            .on("mouseout", () => tooltip.style("visibility", "hidden"))
 
         d3.select("#legend")
             .append("rect")
