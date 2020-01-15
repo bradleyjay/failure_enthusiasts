@@ -30,13 +30,13 @@
     <!--header-->
     <h1 class="jumbotron bg-info text-center text-white">Weathervane</h1>
     <div class="row">
-        <form class="col-lg-4 bg-danger" id='droppy-poppy'>
+        <form action='/update' class="col-lg-4 bg-danger" id='droppy-poppy' method="post">
             <div>
                 <label>Date: </label>
-                <input type="date" id="day_choice">
+                <input type="date" name="date">
             </div>
 
-            <select id='metric_name'>
+            <select name='metric_name'>
                 <option value="Temperature"> Temperature </option>
                 <option value="Precipitation Intensity"> Precipitation Intensity</option>
                 <option value="Precipitation Probability"> Precipitation Probability </option>
