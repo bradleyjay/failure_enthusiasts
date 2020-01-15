@@ -32,3 +32,31 @@ GRANT ALL PRIVILEGES ON DATABASE weather_app_db TO weather_app_user;```
 9.  run ps
 find the  process number  PID
 kill  -9  PID
+
+##############
+If you encounter an error for a column that should exist but doesn't, follow the steps below
+
+1. Try: Start the Postgres server! (ideally in another Terminal window)
+```postgres -D /usr/local/var/postgres/```
+
+2. If already running: Log in to the Postgres server
+```psql postgres```
+
+3. Use below command to see list of databases, then look for weather_app_db
+```\list```
+
+4. Switch into the database
+```\c weather_app_db```
+
+5. Use the following to see list of tables in database
+```\dt```
+
+6. If actual and predictive tables already exist in db, drop both using the following
+```DROP TABLE actual_weather;
+DROP TABLE predictive_weather;```
+
+
+
+
+
+#. Pray again.
