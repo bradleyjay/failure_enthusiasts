@@ -28,3 +28,4 @@ Now, two tabs:
 
 5. Tab 2: Start flask app! `./run_flask.sh`
 
+6. Go to http://127.0.0.1:5000/
