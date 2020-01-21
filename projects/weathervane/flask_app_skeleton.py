@@ -43,9 +43,6 @@ def chart_loader():
 
     formatted_data = {"actual": formatted_actual_data, "predictive": formatted_predictive_data}
 
-    print('\n\n\n This is d:\n')
-    print(formatted_data)
-
     return render_template('index.html', actual_data = formatted_actual_data, predictive_data = formatted_predictive_data)
 
 

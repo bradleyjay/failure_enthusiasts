@@ -18,8 +18,6 @@ def make_connection():
 def parse_current(data):
     currently = data["currently"]
 
-    # data_age =
-
     # object Weather_obj requires precipType
     if "precipType" not in currently:
         currently["precipType"] = "null"
@@ -52,11 +50,7 @@ def parse_future(data):
 
     model_array = []
 
-    print("this is for the future \n")
-
     for i in hourly:
-
-        print("\n" + str(i) + "\n\n")
 
         # object Weather_obj requires precipType
         if "precipType" not in i:
@@ -64,6 +58,8 @@ def parse_future(data):
 
         # python uses seconds: this should yield say, 3600, for one hour. JS uses ms.
         data_age = i["time"] - data_collected_timestamp
+
+        # TODO: ROUND data_collected_timestamp TO MIDNIGHT
 
         parsed = Weather_obj(
             data_collected_timestamp,
@@ -81,39 +77,3 @@ def parse_future(data):
 
 
     unpacker('predictive', model_array)
-
-
-
-# def add_data(table, obj):
-#     # table can be 'actual' or 'predicitive'
-#     # obj is the 'model' object, i.e. Weather_obj
-#     # for 'future', list of models is ok, DB team will unpack
-#     # replace with imported add_data
-#     pass
-
-
-
-while True:
-
-# change "time to next minute" to "time to next hour" for the real thing
-
-    # begin the  minute
-    print("\n\n starting  new  minute")
-
-    # calculate time to next minute, wait
-    time_to_next_minute = 60 - datetime.datetime.now().time().second
-    print("time to  next minute: " + str(time_to_next_minute))
-    time.sleep(time_to_next_minute)
-
-
-    # state the time, grab data
-    print("time now: " + str(datetime.datetime.now().time()))
-    data = make_connection()
-
-
-    if datetime.datetime.now().time().hour == 0 and datetime.datetime.now().time().minute == 0:
-
-        parse_future(data)
-
-    parse_current(data)
-    parse_future(data)   # for now
