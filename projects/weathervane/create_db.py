@@ -6,11 +6,6 @@ from sqlalchemy.ext.declarative import declarative_base
 
 import os
 
-db_username = str(os.environ.get('DB_USERNAME'))
-db_password = str(os.environ.get('DB_PASSWORD'))
-db_name = str(os.environ.get('DB_NAME'))
-port = str(os.environ.get('PORT'))
-
 base = declarative_base()
 
 class Actual_weather(base):
@@ -36,16 +31,3 @@ class Predictive_weather(base):
     precipitation_probability = Column(String())
     data_age = Column(Integer())
     data_collected_timestamp = Column(String())
-
-def create_tables():
-    db = create_engine("postgres://" + db_username + ":" + db_password + "@localhost:" + port + "/" + db_name)
-    DBsession = sessionmaker(db)
-    base.metadata.create_all(db)
-    session = DBsession()
-    session.close()
-
-create_tables()
-
-# print(blah.time)
-# new_data = Actual_weather(blah)
-# new_data = Actual_weather(summary="1")

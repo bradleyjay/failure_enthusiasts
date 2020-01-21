@@ -3,19 +3,19 @@ from sqlalchemy.orm import sessionmaker
 from util.model import Weather_obj #check this
 from create_db import Actual_weather, Predictive_weather
 import os
+import psycopg2
 
-db_username = str(os.environ.get('DB_USERNAME'))
-db_password = str(os.environ.get('DB_PASSWORD'))
-db_name = str(os.environ.get('DB_NAME'))
-port = str(os.environ.get('PORT'))
+DATABASE_URL = os.environ['DATABASE_URL']
 
 def add_data(table, obj):
-    db = create_engine("postgres://" + db_username + ":" + db_password + "@localhost:" + port + "/" + db_name)
+    db = create_engine(DATABASE_URL)
     DBsession = sessionmaker(db)
     session = DBsession()
+
     if table == 'actual':
         new_data = Actual_weather(
-                    time = obj.time
+                    id = str(obj.time) + "_" + str(obj.data_collected_timestamp)
+                    , time = obj.time
                     , summary = obj.summary
                     , temperature = obj.temperature
                     , precipitation_intensity = obj.precipitation_intensity
@@ -27,9 +27,11 @@ def add_data(table, obj):
         session.add(new_data)
         session.commit()
         session.close()
+
     elif table == 'predictive':
         new_data = Predictive_weather(
-                    time = obj.time
+                    id = str(obj.time) + "_" + str(obj.data_collected_timestamp)
+                    , time = obj.time
                     , summary = obj.summary
                     , temperature = obj.temperature
                     , precipitation_intensity = obj.precipitation_intensity
@@ -41,6 +43,7 @@ def add_data(table, obj):
         session.add(new_data)
         session.commit()
         session.close()
+
     else:
         print('table name should be actual or predictive')
 
@@ -48,20 +51,8 @@ def add_data(table, obj):
 def unpacker(table, model_array):
     while model_array:
         add_data(table, model_array.pop())
-        # print(model_array[-1])
 
-
-### shitty test
-
-# blah = Weather_obj("1","1","1","3","1","1")
-# blah2 = Weather_obj("1","2","1","1","1","1")
-
-# model_array = [blah, blah2]
-
-# unpacker('actual', model_array)
-
-# data_age and interval are only required when reading predictive data to make sure that only one row of predictive data is selected for a given time
-def read_data(start_time,  end_time, attributes, table, data_age=0, interval=0):
+def read_data(start_time,  end_time, attributes, table):
 
 # start_time, end_time MUST be strings
 # attributes is an array of strings
@@ -76,11 +67,11 @@ def read_data(start_time,  end_time, attributes, table, data_age=0, interval=0):
 #     AND time =< end_time;
 
 
-    db = create_engine("postgres://weather_app_user:1234@localhost:5432/weather_app_db")
+    db = create_engine(DATABASE_URL)
     DBsession = sessionmaker(db)
     session = DBsession()
     attribute_string = ", ".join(attributes)
-    # issue with data age prevents pulling predictive data. Data age is currently calculated as time minus collected time
+
     sql_query = "SELECT " + attribute_string \
                     + " FROM  " + table \
                     + " WHERE time >= '" +  start_time \
@@ -89,16 +80,12 @@ def read_data(start_time,  end_time, attributes, table, data_age=0, interval=0):
         sql_query += "';"
     else:
         sql_query += \
-            "' AND data_age >= '" +  str(data_age - interval) \
-            + "' AND data_age <= '" + str(data_age + interval) \
+            "' AND data_collected_timestamp::decimal >= '" +  start_time \
+            + "' AND data_collected_timestamp::decimal <= '" +  end_time \
             + "';"
 
     # unix timestamp needs to be converted
     # time and start_time are strings, so this might break
-    sql_query
-    print(sql_query)
-    print( db.execute(sql_query))
-    print(type(db.execute(sql_query)))
     # fetchall is required to actually send
     # https://docs.sqlalchemy.org/en/13/core/connections.html#sqlalchemy.engine.ResultProxy.fetchall
     #  fetchall has a soft close,  don't have to close session, but lets be adults
