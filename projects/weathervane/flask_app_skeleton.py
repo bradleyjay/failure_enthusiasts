@@ -20,15 +20,15 @@ def chart_loader():
 
     end_time = str(datetime.datetime.now().timestamp())
 
-    print('\n\n grab_from_actual  \n\n')
+    # print('\n\n grab_from_actual  \n\n')
 
     actual_data = query_suite.grab_from_actual(
         start_time, end_time, ['time', 'temperature'])
 
     predictive_data = query_suite.grab_from_predictive(
         start_time, end_time, ['time', 'temperature'])
-    print('Predictive!')
-    print(predictive_data)
+    # print('Predictive!')
+    # print(predictive_data)
 
     # unpack from dict (JS can't use it) -> list of lists. save data to variable, pass to js
 
