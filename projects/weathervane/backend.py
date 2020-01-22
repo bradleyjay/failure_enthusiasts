@@ -16,6 +16,7 @@ def make_connection():
     return data
 
 def parse_current(data):
+    resp = requests.get('https://api.darksky.net/forecast/' + api_key + '/40.756438,-73.990299')
     currently = data["currently"]
 
     # object Weather_obj requires precipType
@@ -73,7 +74,5 @@ def parse_future(data):
             )
 
         model_array.insert(0,parsed)
-        # print("this is one of them: \n" + str(parsed.time))
-
 
     unpacker('predictive', model_array)
