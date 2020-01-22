@@ -41,6 +41,14 @@ def chart_loader():
     for data in predictive_data['predictive_data']:
         formatted_predictive_data.append({"time": float(data[0]), "temperature": float(data[1])})
 
+    # sort each dataset by the "time" attribute
+    formatted_actual_data = sorted(formatted_actual_data, key=lambda x: (x['time']))
+
+    formatted_predictive_data = sorted(formatted_predictive_data, key=lambda x: (x['time']))
+
+    print('\n\n sorted predictive data:')
+    print(formatted_predictive_data)
+
     formatted_data = {"actual": formatted_actual_data, "predictive": formatted_predictive_data}
 
     return render_template('index.html', actual_data = formatted_actual_data, predictive_data = formatted_predictive_data)
