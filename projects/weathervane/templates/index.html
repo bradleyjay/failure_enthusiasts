@@ -39,30 +39,26 @@
     <!--header-->
     <h1 class="jumbotron bg-info text-center text-white">Weathervane</h1>
     <div class="row">
-        <form class="col-lg-4 bg-danger" id='droppy-poppy'>
+        <form  id='droppy-poppy' method="post">
             <div>
                 <label>Date: </label>
-                <input type="date" id="day_choice">
+                <input type="date" name="date">
             </div>
 
-            <select class="selectpicker" data-live-search="true" id='metric_name' data-style="btn-primary">
-                <option value="Temperature"> Temperature </option>
-                <option value="Precipitation Intensity"> Precipitation Intensity</option>
-                <option value="Precipitation Probability"> Precipitation Probability </option>
+            <select class="selectpicker" data-live-search="true" name='metric_name' data-style="btn-primary">
+                <option value="temperature"> Temperature </option>
+                <option value="precipitation_intensity"> Precipitation Intensity</option>
+                <option value="precipitation_probability"> Precipitation Probability </option>
                 <input type="submit" value="Submit">
             </select>
 
         </form>
-
         <!-- <img src="../static/img.jpg"> -->
         <div id="chart" class="col-lg-8">
-
             <script src="https://d3js.org/d3.v4.min.js"></script>
             <script class="jumbotron" type="text/javascript" src="/static/chart_generation.js"></script>
-
         </div>
     </div>
-    </div>>
     <!-- Footer -->
     <footer class="page-footer font-small blue bg-info text-white">
 

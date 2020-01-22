@@ -3,32 +3,39 @@ import query_suite
 
 import io
 import random
-from flask import Response, render_template
+from flask import Response, render_template, request, redirect
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 from matplotlib.figure import Figure
 import query_suite
 import datetime
+import time
 
 app = Flask(__name__)
 
 
-@app.route('/')
+@app.route('/', methods=['GET','POST'])
 def chart_loader():
+    if request.method == 'POST':
+        string_date = request.form['date']
+        pattern = '%Y-%m-%d'
+        date = int(time.mktime(time.strptime(string_date, pattern)))
+        metric = request.form['metric_name']
+    else:
+        metric = 'temperature'
+        date = datetime.datetime.combine(datetime.datetime.today(), datetime.time.min).timestamp()
 
-    start_time = str(datetime.datetime.combine(
-        datetime.datetime.today(), datetime.time.min).timestamp())
+    #pass date here
+    start_time = str(date)
 
-    end_time = str(datetime.datetime.now().timestamp())
-
-    print('\n\n grab_from_actual  \n\n')
-
+    end_epoch = date + 68400
+    #pass date here
+    end_time = str(end_epoch)
+    #pass metric here
     actual_data = query_suite.grab_from_actual(
-        start_time, end_time, ['time', 'temperature'])
-
+        start_time, end_time, ['time', metric])
+        #pass metric here
     predictive_data = query_suite.grab_from_predictive(
-        start_time, end_time, ['time', 'temperature'])
-    print('Predictive!')
-    print(predictive_data)
+        start_time, end_time, ['time', metric])
 
     # unpack from dict (JS can't use it) -> list of lists. save data to variable, pass to js
 
@@ -50,9 +57,12 @@ def chart_loader():
     print(formatted_predictive_data)
 
     formatted_data = {"actual": formatted_actual_data, "predictive": formatted_predictive_data}
+    print("metric")
+    print(metric)
+    print("formatted data")
+    print(formatted_data)
 
     return render_template('index.html', actual_data = formatted_actual_data, predictive_data = formatted_predictive_data)
-
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=3030)
