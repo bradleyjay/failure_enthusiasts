@@ -189,4 +189,4 @@ function createLineChart(actual_data, predictive_data, chart_title, y_axis_label
 }
 
 
-createLineChart(actual_data, predictive_data, "Predictive vs Actual Weather", "Degrees (F)", "Time", ['Actual', 'Predicitive'])
+createLineChart(actual_data, predictive_data, "Predictive vs Actual Weather", "Unit", "Time", ['Actual', 'Predicitive'])
