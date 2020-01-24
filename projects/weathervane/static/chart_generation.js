@@ -53,10 +53,6 @@ function createLineChart(actual_data, predictive_data, chart_title, y_axis_label
 
     // render basic line
 
-    actual_x_min = d3.min(actual_data, (d) => d["time"])
-    actual_x_max = d3.max(actual_data, (d) => d["time"])
-    actual_y_max = d3.max(actual_data, (d) => d["temperature"])
-
     // bogus extreme values in case formatted_data isn't available
 
     if (predictive_data.length == 0) {
@@ -67,6 +63,16 @@ function createLineChart(actual_data, predictive_data, chart_title, y_axis_label
         predictive_x_min = d3.min(predictive_data, (d) => d["time"])
         predictive_x_max = d3.max(predictive_data, (d) => d["time"])
         predictive_y_max = d3.max(predictive_data, (d) => d["temperature"])
+    }
+
+    if (actual_data.length == 0) {
+        actual_x_min = 32529079406000
+        actual_x_max = -2183589394000
+        actual_y_max = -5000
+    } else {
+        actual_x_min = d3.min(actual_data, (d) => d["time"])
+        actual_x_max = d3.max(actual_data, (d) => d["time"])
+        actual_y_max = d3.max(actual_data, (d) => d["temperature"])
     }
 
     var x_min = Math.min(actual_x_min, predictive_x_min)
@@ -110,11 +116,11 @@ function createLineChart(actual_data, predictive_data, chart_title, y_axis_label
             .attr("cx", d => x(d["time"]))
             .attr("cy", d => y(d["temperature"]))
             .attr("fill", (d, i) => {
-                if (i % dynamic_mod == 0) {
+                // if (i % dynamic_mod == 0) {
                     return line_color
-                } else {
-                    return "none"
-                }
+                // } else {
+                //     return "none"
+                // }
             })
             .on("mouseover", () => tooltip.style("visibility", "visible"))
             .on("mousemove", (d) => {
@@ -152,7 +158,9 @@ function createLineChart(actual_data, predictive_data, chart_title, y_axis_label
         // for next time, https://www.d3-graph-gallery.com/graph/custom_legend.html
     }
 
-    addLine(actual_data, dataset_name[0], "red")
+    if (actual_data != []) {
+      addLine(actual_data, dataset_name[0], "red")
+    }
 
     if (predictive_data != []) {
         addLine(predictive_data, dataset_name[1], "black")

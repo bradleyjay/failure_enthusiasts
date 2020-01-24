@@ -75,14 +75,10 @@ def read_data(start_time,  end_time, attributes, table):
     sql_query = "SELECT " + attribute_string \
                     + " FROM  " + table \
                     + " WHERE time >= '" +  start_time \
-                    + "' AND time <= '" + end_time
-    if (table == "actual_weather"):
-        sql_query += "';"
-    else:
-        sql_query += \
-            "' AND data_collected_timestamp::decimal >= '" +  start_time \
-            + "' AND data_collected_timestamp::decimal <= '" +  end_time \
-            + "';"
+                    + "' AND time <= '" + end_time \
+                    + "';"
+
+    print(sql_query)
 
     # unix timestamp needs to be converted
     # time and start_time are strings, so this might break

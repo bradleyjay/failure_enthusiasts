@@ -53,8 +53,8 @@ def chart_loader():
 
     formatted_predictive_data = sorted(formatted_predictive_data, key=lambda x: (x['time']))
 
-    print('\n\n sorted predictive data:')
-    print(formatted_predictive_data)
+    # print('\n\n sorted predictive data:')
+    # print(formatted_predictive_data)
 
     formatted_data = {"actual": formatted_actual_data, "predictive": formatted_predictive_data}
     print("metric")
