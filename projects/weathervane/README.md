@@ -23,8 +23,9 @@ Agent to periodically collect weather data from the Darksky API (https://darksky
 
 3. Activate the virtualEnv - `. venv/bin/activate`
 
-Now, two tabs:
-4. Tab 1: Run the app! `./run.sh`
+4. Tab 2: Start flask app! `./run_flask.sh`
 
-5. Tab 2: Start flask app! `./run_flask.sh`
+5. Go to `http://0.0.0.0:3030/` (or set local port location - flask will report the URL at runtime)
 
+For styling:
+https://developer.snapappointments.com/bootstrap-select/examples/
