@@ -4,6 +4,7 @@ import datetime
 import os
 from util.model import Weather_obj #check this
 from crud import unpacker
+import math
 #from CRUD_MODULE import add_data
 
 api_key = str(os.environ.get('API_KEY'))
@@ -45,7 +46,11 @@ def parse_current(data):
 
 
 
-def parse_future(data):
+def parse_future():
+    generate_future_timestamp = str(math.floor(time.time()) + 86400)
+    data = requests.get('https://api.darksky.net/forecast/' + api_key + '/40.756438,-73.990299,' + generate_future_timestamp).json()
+    # jsonish = data.json()
+    # print(jsonish)
     hourly = data["hourly"]["data"]
 
     model_array = []
