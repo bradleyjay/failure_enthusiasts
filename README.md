@@ -6,7 +6,7 @@ Our code base lives here - session notes, setup files for projects, and projects
 
 ---
 
-**If this is your first time here, please navigate to our initial setup and follow those instructions:**
+**If this is your first time here, please navigate to our initial setup page and follow those instructions:**
 
 - [0-python101-environment-setup](https://github.com/bradleyjay/failure_enthusiasts/tree/master/0-python101-environment-setup)
 
